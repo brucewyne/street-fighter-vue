@@ -32,6 +32,7 @@ export default {
 	.progress-amount {
 		background: green;
 		height: 100%;
+		transition: .5s ease all;
 	}
 }
 </style>
