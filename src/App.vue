@@ -9,16 +9,17 @@
 			<div class="opponent fighter column">
 				<span class="fighter-name">Player 1</span>
 				<health-meter :health-value="opponentHealth"></health-meter>
-			</div>  
+			</div>
 		</div>
 		<div class="row">
 			<div class="column">
 				<custom-button v-if="gameInPlay" :button-style="'green'" @pressed="handlePunchButton"></custom-button>
 				<custom-button v-if="gameInPlay" :button-style="'red'" @pressed="handleSpecialButton"></custom-button>
-			</div>  
+				<custom-button v-if="gameInPlay && shouldKickAss" :button-style="'gold'" @pressed="handleKickAssButton"></custom-button>
+			</div>
 			<div class="column">
 				<log :messages="messageLog"></log>
-			</div>  
+			</div>
 		</div>
 		<modal :visible="showModal">
 			<div v-html="gameOverMessage"></div>
@@ -44,9 +45,15 @@ export default {
 			messageLog: [],
 			showModal: false,
 			gameInPlay: true,
-			gameOverMessage: ''
+			gameOverMessage: '',
+			konamiKeys: [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
+			currentPosition: 0,
+			shouldKickAss: false,
 		}
 	},
+	created() {
+    window.addEventListener("keyup", this.listen);
+  },
 	components: {
 			CustomButton,
 			HealthMeter,
@@ -54,6 +61,22 @@ export default {
 			Modal
 		},
 	methods: {
+		listen(e){
+			const key = e.keyCode;
+			if (this.konamiKeys.includes(key)) {
+        if (key === this.konamiKeys[this.currentPosition]) {
+          this.currentPosition += 1;
+          if (this.currentPosition === this.konamiKeys.length) {
+						this.shouldKickAss = true;
+						this.currentPosition = 0;
+					}
+				} else {
+					this.currentPosition = 0;
+					this.shouldKickAss = false;
+					console.log('FAILED');
+				}
+			}
+		},
 		getRandomDamageAmount: function(min, max) {
 			return Math.floor(Math.random() * (max - min + 1)) + min;
 		},
@@ -68,6 +91,12 @@ export default {
 			let damage = this.getRandomDamageAmount(5,9);
 			this.opponentHealth = this.opponentHealth - damage;
 			this.messageLog.push(`Player used Special Attack and did ${damage} damage`);
+			this.checkForGameOver();
+			this.opponentsTurn();
+		},
+		handleKickAssButton: function() {
+			this.opponentHealth = 0;
+			this.messageLog.push(`Player just whooped some ass and did over 9,000 damage`);
 			this.checkForGameOver();
 			this.opponentsTurn();
 		},
@@ -102,6 +131,7 @@ export default {
 			this.messageLog = [];
 			this.showModal = false;
 			this.gameInPlay = true;
+			this.shouldKickAss = false;
 		}
 	}
 }
@@ -109,25 +139,25 @@ export default {
 
 <style lang="scss">
 #app {
-	font-family: Arial, Helvetica, sans-serif
+  font-family: Arial, Helvetica, sans-serif;
 }
 h1 {
-	font-size: 48px;
-	font-weight: normal;
-	margin-bottom: 30px;
-	text-align: center;
+  font-size: 48px;
+  font-weight: normal;
+  margin-bottom: 30px;
+  text-align: center;
 }
 .row {
-	display: flex;
-	margin: 0 auto;
-	max-width: 900px;
-	.column {
-		flex: 1 0 50%;
-		padding: 0 10px;
-	}
+  display: flex;
+  margin: 0 auto;
+  max-width: 900px;
+  .column {
+    flex: 1 0 50%;
+    padding: 0 10px;
+  }
 }
 
 .fighters {
-	margin-bottom: 50px;
+  margin-bottom: 50px;
 }
 </style>
