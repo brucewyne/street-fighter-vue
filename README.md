@@ -13,4 +13,4 @@ npm run dev
 
 ```
 
-Want to see the working demo? [View Demo] (https://street-fighter-vue.herokuapp.com/)
+Want to see the working demo? [View Demo](https://street-fighter-vue.herokuapp.com/)
