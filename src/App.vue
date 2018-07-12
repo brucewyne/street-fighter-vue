@@ -64,9 +64,9 @@ export default {
 		listen(e){
 			const key = e.keyCode;
 			if (this.konamiKeys.includes(key)) {
-        if (key === this.konamiKeys[this.currentPosition]) {
-          this.currentPosition += 1;
-          if (this.currentPosition === this.konamiKeys.length) {
+				if (key === this.konamiKeys[this.currentPosition]) {
+					this.currentPosition += 1;
+					if (this.currentPosition === this.konamiKeys.length) {
 						this.shouldKickAss = true;
 						this.currentPosition = 0;
 					}
