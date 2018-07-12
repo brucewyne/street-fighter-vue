@@ -52,8 +52,8 @@ export default {
 		}
 	},
 	created() {
-    window.addEventListener("keyup", this.listen);
-  },
+		window.addEventListener("keyup", this.listen);
+	},
 	components: {
 			CustomButton,
 			HealthMeter,
@@ -139,25 +139,25 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: Arial, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 }
 h1 {
-  font-size: 48px;
-  font-weight: normal;
-  margin-bottom: 30px;
-  text-align: center;
+	font-size: 48px;
+	font-weight: normal;
+	margin-bottom: 30px;
+	text-align: center;
 }
 .row {
-  display: flex;
-  margin: 0 auto;
-  max-width: 900px;
-  .column {
-    flex: 1 0 50%;
-    padding: 0 10px;
-  }
+	display: flex;
+	margin: 0 auto;
+	max-width: 900px;
+	.column {
+		flex: 1 0 50%;
+		padding: 0 10px;
+	}
 }
 
 .fighters {
-  margin-bottom: 50px;
+	margin-bottom: 50px;
 }
 </style>
