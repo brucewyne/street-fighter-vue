@@ -7,7 +7,7 @@
 				<health-meter :health-value="playerHealth"></health-meter>
 			</div>
 			<div class="opponent fighter column">
-				<span class="fighter-name">Player 1</span>
+				<span class="fighter-name">Opponent</span>
 				<health-meter :health-value="opponentHealth"></health-meter>
 			</div>
 		</div>
