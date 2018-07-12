@@ -1,25 +1,18 @@
 <template>
-	<div v-if="visible" class="overlay" @click="closeOverlay">
+	<div class="overlay">
 		<div class="modal">
-			<span class="modal-close" @click="closeOverlay">
+			<div class="modal-close">
 				&times;
-			</span>	
-			<div class="modal-content">
-				<slot></slot>
 			</div>
+			<div class="modal-content">
+				all the content goes here.
+			</div>		
 		</div>	
-	</div>	
+	</div>
 </template>
 
 <script>
-	export default {
-		props: ['visible'],
-		methods: {
-			closeOverlay: function() {
-				this.visible = false;
-			}
-		}
-	}
+
 </script>
 
 <style lang="scss">

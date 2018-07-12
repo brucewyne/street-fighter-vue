@@ -1,23 +1,25 @@
 <template>
-	<button class="button" :class="customClass" @click="handleClick">
-		<slot></slot>
-	</button>
+	<button class="button" :class="buttonStyle" @click="handleClick">
+		
+	</button>	
 </template>
 
 <script>
+
 export default {
 	props: ['button-style'],
 	data() {
 		return {
-			customClass: this.buttonStyle
+			
 		}
 	},
 	methods: {
-		handleClick: function() {
-			this.$emit('pressed');
+		handleClick: function(){
+			this.$emit("pressed");
 		}
 	}
 }
+
 </script>
 
 <style lang="scss">
